@@ -1,0 +1,109 @@
+{
+  "songId": 31795,
+  "revisionId": 8869686,
+  "cases": [
+    {
+      "partId": 21,
+      "name": "Hal Blaine | Drums",
+      "expectedMidi": [38, 38, 38],
+      "revision": {
+        "partId": 21,
+        "instrumentId": 1024,
+        "tuning": [],
+        "measures": [
+          {
+            "signature": [4, 4],
+            "voices": [
+              {
+                "beats": [
+                  { "notes": [{ "rest": true }], "type": 8, "rest": true, "duration": [1, 8], "beamStart": true },
+                  { "notes": [{ "fret": 38, "string": 1.5 }], "velocity": "mp", "type": 16, "duration": [1, 16] },
+                  { "notes": [{ "fret": 38, "string": 1.5 }], "type": 16, "duration": [1, 16], "beamStop": true },
+                  { "notes": [{ "fret": 38, "string": 1.5, "accentuated": 1 }], "type": 4, "duration": [1, 4] },
+                  { "notes": [{ "rest": true }], "type": 2, "rest": true, "duration": [1, 2] }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "partId": 22,
+      "name": "Hal Blaine | Sleigh Bells",
+      "expectedMidi": [83, 83, 83, 83],
+      "revision": {
+        "partId": 22,
+        "instrumentId": 1024,
+        "tuning": [],
+        "measures": [
+          {
+            "signature": [4, 4],
+            "voices": [
+              {
+                "beats": [
+                  { "notes": [{ "fret": 83, "string": -1 }], "velocity": "mp", "type": 4, "duration": [1, 4] },
+                  { "notes": [{ "fret": 83, "string": -1 }], "type": 4, "duration": [1, 4] },
+                  { "notes": [{ "fret": 83, "string": -1 }], "type": 4, "duration": [1, 4] },
+                  { "notes": [{ "fret": 83, "string": -1 }], "type": 4, "duration": [1, 4] }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "partId": 23,
+      "name": "Jim Gordon | Plastic Cups",
+      "expectedMidi": [77, 76, 77, 76, 76],
+      "revision": {
+        "partId": 23,
+        "instrumentId": 1024,
+        "tuning": [],
+        "measures": [
+          {
+            "signature": [4, 4],
+            "marker": { "text": "Verse", "width": 41 },
+            "voices": [
+              {
+                "beats": [
+                  { "notes": [{ "fret": 77, "string": 1.5 }], "velocity": "mp", "type": 4, "duration": [1, 4] },
+                  { "notes": [{ "fret": 76, "string": 1 }], "type": 4, "duration": [1, 4] },
+                  { "notes": [{ "fret": 77, "string": 1.5 }], "type": 8, "duration": [1, 8], "beamStart": true },
+                  { "notes": [{ "fret": 76, "string": 1 }], "type": 8, "duration": [1, 8], "beamStop": true },
+                  { "notes": [{ "fret": 76, "string": 1 }], "type": 4, "duration": [1, 4] }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "partId": 24,
+      "name": "Terry Melcher | Tambourine",
+      "expectedMidi": [54, 54, 54, 54],
+      "revision": {
+        "partId": 24,
+        "instrumentId": 1024,
+        "tuning": [],
+        "measures": [
+          {
+            "signature": [4, 4],
+            "voices": [
+              {
+                "beats": [
+                  { "notes": [{ "fret": 54, "string": 1.5 }], "velocity": "mp", "type": 4, "duration": [1, 4] },
+                  { "notes": [{ "fret": 54, "string": 1.5 }], "type": 4, "duration": [1, 4] },
+                  { "notes": [{ "fret": 54, "string": 1.5 }], "type": 4, "duration": [1, 4] },
+                  { "notes": [{ "fret": 54, "string": 1.5 }], "type": 4, "duration": [1, 4] }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

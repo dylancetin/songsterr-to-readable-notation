@@ -1,0 +1,30 @@
+{
+  "name": "midi-to-readable-notaion",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "bun run --parallel dev:api dev:vite",
+    "dev:api": "HOST=127.0.0.1 PORT=3001 bun --hot index.ts",
+    "dev:vite": "vite --host",
+    "build": "vite build",
+    "prod": "bun run build && HOST=${HOST:-0.0.0.0} PORT=${PORT:-4813} bun run start",
+    "start": "NODE_ENV=production bun index.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "bun test ./src"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@vitejs/plugin-react": "^6.1.1",
+    "typescript": "^7",
+    "vite": "^8.3.2"
+  },
+  "dependencies": {
+    "react": "^19",
+    "react-dom": "^19",
+    "lucide-react": "^0.468.0",
+    "zod": "^4"
+  }
+}
