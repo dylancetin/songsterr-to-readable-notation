@@ -1,95 +1,72 @@
-# Read a Songsterr score
+# Note / line
 
-Note / line turns a Songsterr track into letter notes with octave labels, rhythm, and aligned lyrics when the source includes them. It is a reading-only app built with Bun 1.4.2, Vite, React 19, and TypeScript, with no playback or score editing.
+Turn a Songsterr track into readable letter notes, with octave labels, rhythm, and lyrics aligned to the melody. Listen to the selected part while the current bar is highlighted.
 
-## Start the app
+![God Only Knows open in Note / line, with the French horn track selected and playback highlighting the first bar](docs/screenshots/score-reader.png)
 
-With [Bun 1.4.2](https://bun.com) installed, run these commands from the project directory:
+## Read a song
+
+1. Paste a Songsterr song link and click **Import song**, or click **Try God Only Knows**.
+2. Choose an instrument or voice in **Arrangement**. Filter by **Vocals** or search for a track. On mobile, open **Tracks** first.
+3. Click **First note** to skip opening rests, then **Play** to hear the selected part. Use **Bar** to jump elsewhere.
+
+Each letter is a pitch; the number is its octave (`C4` is middle C). Stems and beams show rhythm, stacked notes form chords, and rest symbols mark silence. Open **How to read this notation** for the reading key.
+
+Use **Transpose**, **Accidentals**, and **Zoom** to adjust the score. Toggle **Lyrics** when the source includes them, or **Print** to save a clean PDF. Playback uses piano sounds for pitched parts and percussion sounds for drums.
+
+## Lyrics and mobile views
+
+<details>
+<summary>Vocal score with aligned lyrics</summary>
+
+*In My Life* by The Beatles, with John Lennon's double-tracked lead vocals selected. Syllables sit beneath their notes; hyphens split words and underlines continue a syllable.
+
+![In My Life vocal score with letter notes and lyrics aligned beneath the melody](docs/screenshots/lyrics-reader.png)
+
+</details>
+
+<details>
+<summary>Reading on a phone</summary>
+
+The same vocal track after jumping to its first note in bar 4.
+
+<img src="docs/screenshots/mobile-reader.png" alt="Mobile score reader showing playback controls and the opening vocal notes and lyrics of In My Life" width="430">
+
+</details>
+
+## Run locally
+
+With [Bun 1.4.2](https://bun.com) installed:
 
 ```bash
 bun install
 bun run dev
 ```
 
-Open <http://localhost:4813>. The dev command starts Vite with `--host` and the Bun import API on `127.0.0.1:3001`. Vite proxies `/api` requests to Bun.
+Open <http://localhost:4813>. Vite serves the frontend and proxies `/api` to the Bun server on port `3001`.
 
-For Tailscale access, open `http://<tailscale-ip>:4813` or `http://<magicdns-name>.ts.net:4813` on another device in your tailnet.
-
-To change Vite's port, start the API and Vite in separate terminals:
-
-```bash
-bun run dev:api
-bun run dev:vite --port 4814
-```
-
-To build the frontend into `dist`, run:
-
-```bash
-bun run build
-```
-
-To build and run production with the same network access and port as dev, use:
+For production, stop the dev server and run:
 
 ```bash
 bun run prod
 ```
 
-Open <http://localhost:4813> or <http://beelinkk.tail750ac6.ts.net:4813> from your tailnet. This command builds `dist` and serves the built frontend and import API on `0.0.0.0:4813` (the equivalent of Vite's `--host`). Stop dev first, since both use port `4813`. Override the port with `PORT=4814 bun run prod`, or restrict the interface with `HOST=127.0.0.1 bun run prod`.
+This builds and serves the app on port `4813`. Override it with `PORT=4814 bun run prod`, or bind locally with `HOST=127.0.0.1 bun run prod`.
 
-To run an existing build without rebuilding, use:
+## Open directly from Songsterr
 
-```bash
-bun run start
-```
+1. Copy [`scripts/songsterr-note-line.user.js`](scripts/songsterr-note-line.user.js) into a new Tampermonkey script.
+2. Set `SERVER_URL` near the top to your running app's address, such as `http://localhost:4813/`, and save.
+3. On Songsterr, click **Read letter notes** below the song title to import the current track.
 
-The standalone `start` command uses port `3000` by default and also binds to all interfaces. To change it, set `PORT`:
+## Development
 
-```bash
-PORT=3002 bun run start
-```
-
-## Open the current track from Songsterr
-
-1. Start the production server with `bun run prod`.
-2. With Tampermonkey installed, open <http://beelinkk.tail750ac6.ts.net:4813/songsterr-note-line.user.js> and choose **Install**. Alternatively, copy [`scripts/songsterr-note-line.user.js`](scripts/songsterr-note-line.user.js) into a new Tampermonkey script.
-3. Open a Songsterr tab. Click **Read letter notes** below its song title. The same browser tab opens Note / line and automatically imports the current Songsterr link.
-
-The userscript defaults to `http://beelinkk.tail750ac6.ts.net:4813/`. To use localhost, another host, or another port, edit `SERVER_URL` near the top of [`scripts/songsterr-note-line.user.js`](scripts/songsterr-note-line.user.js).
-
-The button is a normal `<a href>` carrying the current Songsterr URL in `?song=...`. Its link updates during in-page navigation, with no custom click handler, requests, or Tampermonkey permissions. Track IDs encoded in the Songsterr link are preserved; links without a track ID use the reader's default track. Your device needs network access to the configured server.
-
-## Import and read a track
-
-1. Paste a complete HTTPS Songsterr song link into the URL field.
-2. Click **Import song**. To use the included example, click **Try God Only Knows** instead.
-3. Choose a track in **Arrangement**. Use **Vocals** or **Search tracks** to find a part. On a narrow screen, open **Tracks** first.
-4. Click **First note** to jump to the first bar containing notes and skip opening rests. To jump elsewhere, enter a number in **Bar** and click its arrow.
-5. Read left to right. Each label gives a pitch and its octave. `C4` is middle C. Stacked labels form a chord, and rest symbols mark silence.
-
-Stems, flags, beams, dots, and tuplet numbers give the rhythm. Open **How to read this notation** for the reading key.
-
-For vocal lyrics, import [In My Life by The Beatles](https://www.songsterr.com/a/wsa/beatles-in-my-life-vocal-tab-s2814) and choose **John Lennon | Double-Tracked Lead Vocals**. The opening words appear in bar 4. Each syllable sits below its note. Hyphens split words across notes, and underlines continue the previous syllable. Click **Lyrics** to hide or show the words. Tracks without source lyrics display a message.
-
-To adjust the score or print it, use the reading controls:
-
-- Use **Transpose** to shift pitched notes by semitones, up to one octave in either direction. Drum labels stay unchanged.
-- Choose **Accidentals** `♯` or `♭` to change note spelling without changing pitch.
-- Use **Zoom** to set the score size from 75% to 150%.
-- Click **Print** to print the selected track or save it as a PDF through your browser. The print view hides navigation and reading controls.
-
-If **Import notes** appears, expand it to inspect source-data warnings. See [Songsterr conversion](docs/songsterr-conversion.md) for pitch, rhythm, and support limits.
-
-## Check the project
-
-Run the type check and offline tests:
+Built with Bun, Vite, React 19, and TypeScript.
 
 ```bash
 bun run typecheck
 bun run test
+bun run build
 ```
 
-To also test an import against Songsterr and its CDN, run:
-
-```bash
-SONGSTERR_LIVE=1 bun test src/server/songsterr.test.ts
-```
+See [Songsterr conversion](docs/songsterr-conversion.md) for pitch, rhythm, and support limits.
